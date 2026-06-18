@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi Pengelolaan Sampah Sekolah</title>
+    
+    <style>
+        /* --- RESET & FONTS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        /* --- SPACE LATAR BELAKANG (BACKGROUND) AMBIENT --- */
+        body {
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #dcfce7 100%);
+            background-attachment: fixed;
+            color: #1e293b;
+            padding-bottom: 60px;
+        }
+
+       /* --- 1. BANNER IDENTITAS SEKOLAH --- */
+        .school-banner {
+            background: linear-gradient(135deg, #0e6b30, #16a34a);
+            color: white;
+            padding: 25px 40px; /* Ditambah padding kanan-kiri agar logo tidak terlalu mepet dekorasi browser */
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2);
+            border-bottom: 4px solid #bbf7d0;
+            
+            /* KODE FLEXBOX SEKARANG SUDAH MASUK KE DALAM SINI */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Mengatur agar teks tetap berada di tengah */
+        .banner-text {
+            flex: 1;
+            text-align: center; /* Memastikan teks h1 dan p di dalamnya ikut rata tengah */
+        }
+
+        .school-banner h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .school-banner p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* UKURAN DAN BENTUK LOGO BANNER */
+        .banner-logo {
+            width: 80px;         /* Atur lebar logo di sini */
+            height: 80px;        /* Atur tinggi logo di sini */
+            object-fit: contain; /* Menjaga proporsi gambar agar tidak gepeng */
+            flex-shrink: 0;       /* Tambahan agar gambar logo tidak gepeng/tertekan oleh teks */
+        }
+
+        /* RESPONSIVE: Agar otomatis rapi saat dibuka di HP */
+        @media (max-width: 768px) {
+            .school-banner {
+                flex-direction: column; 
+                padding: 20px;
+                gap: 15px;
+            }
+            .banner-logo {
+                width: 65px;
+                height: 65px;
+            }
+        }
+
+        /* AGAR RESPONSIF DI LAYAR HP */
+        @media (max-width: 768px) {
+            .school-banner {
+                flex-direction: column; /* Susunan otomatis berubah ke bawah jika layar HP terlalu kecil */
+                padding: 20px;
+            }
+            .banner-logo {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .school-banner h1 {
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .school-banner p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* --- NAVIGASI / MENU KELOMPOK --- */
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #16a34a;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #3be057;
+            color: white;
+        }
+
+        /* --- WRAPPER KONTEN UTAMA --- */
+        .main-wrapper {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* --- KOTAK SEKSI UMUM (GLASSMORPHISM) --- */
+        .section-box {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #16a34a;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #22c55e;
+            margin: 8px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* --- 2. MENU/SEKSI ANGGOTA KELOMPOK (4 ANGGOTA) --- */
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .team-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            width: 220px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .team-card h4 { color: #1e293b; font-size: 1.1rem; }
+        .team-card p { color: #64748b; font-size: 0.9rem; margin-top: 4px; }
+
+        /* --- 3. SEKSI PERMASALAHAN SAMPAH --- */
+        .problem-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .problem-img-box {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .problem-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .problem-desc {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .problem-desc h4 {
+            font-size: 1.3rem;
+            color: #ef4444;
+            margin-bottom: 12px;
+        }
+
+        .problem-desc p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        /* --- GAME PILIH SAMPAH INTERAKTIF --- */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 20px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(22, 163, 74, 0.1);
+        }
+
+        .card-organik:hover { border-color: #22c55e; }
+        .card-anorganik:hover { border-color: #3b82f6; }
+        .card-b3:hover { border-color: #ef4444; }
+
+        .sampah-img {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .btn-organik { background: #22c55e; }
+        .btn-anorganik { background: #3b82f6; }
+        .btn-b3 { background: #ef4444; }
+
+        .info-box {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* --- 4. SEKSI EDUKASI 3R --- */
+        .rrr-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .rrr-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            width: 300px;
+            border-top: 5px solid #31c166;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        .rrr-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rrr-card p {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* --- 5. SEKSI INFOGRAFIS / POSTER --- */
+        .poster-box {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+        }
+
+        .poster-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 4px solid white;
+        }
+
+        .poster-img {
+            width: 100%;
+            display: block;
+        }
+
+        /* --- ANIMASI --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .problem-container { flex-direction: column; }
+            .school-banner h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= 1. BANNER IDENTITAS SEKOLAH ================= -->
+  <header class="school-banner">
+        <img src="logo 36.png" alt="Logo Sekolah" class="banner-logo">
+        
+        <div class="banner-text">
+            <h1>SMKN NEGERI 36 JAKARTA</h1>
+            <p> Website Edukasi Pengelolaan Sampah Kreatif</p>
+        </div>
+        
+        <img src="logo tkj.png" alt="Logo Samping" class="banner-logo">
+    </header>
+
+    <!-- MENU NAVIGASI KELOMPOK -->
+    <nav>
+        <a href="#kelompok">Anggota Kelompok</a>
+        <a href="#masalah">Masalah Sampah</a>
+        <a href="#interaktif">Pilah Sampah</a>
+        <a href="#edukasi3r">Prinsip 3R</a>
+        <a href="#poster">Infografis</a>
+    </nav>
+
+    <!-- WRAPPER KONTEN -->
+    <div class="main-wrapper">
+
+        <!-- ================= 2. SEKSI ANGGOTA KELOMPOK (4 ORANG) ================= -->
+        <section id="kelompok" class="section-box">
+            <h3 class="section-title">Tim Pengembang Website</h3>
+            <div class="team-grid">
+                <!-- Anggota 1 -->
+                <div class="team-card">
+                    <span class="team-avatar">👨‍💻</span>
+                    <h4>Clara Permata Ariani</h4>
+                    <p>NIS. 12010</p>
+                   
+                    
+                </div>
+                <!-- Anggota 2 -->
+                <div class="team-card">
+                    <span class="team-avatar">🎨</span>
+                    <h4>Khansa Fauziyyah Ramdhani</h4>
+                    <p>NIS. 12022</p>
+                   
+                    
+                </div>
+                <!-- Anggota 3 -->
+                <div class="team-card">
+                    <span class="team-avatar">✍️</span>
+                    <h4>Putri Aulia Humairoh </h4>
+                    <p>NIS. 12032</p>
+                   
+                </div>
+                <!-- Anggota 4 (Baru) -->
+                <div class="team-card">
+                    <span class="team-avatar">✨</span>
+                    <h4>Rizky Amalya</h4>
+                    <p>NIS. 12037</p>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 3. SEKSI INTERAKTIF MATERI PENGELOLAAN SAMPAH ================= -->
+        <section id="masalah" class="section-box">
+            <h3 class="section-title">Masalah Pengelolaan Sampah</h3>
+            <div class="problem-container">
+                <div class="problem-img-box">
+                    <img src="sampah.jpeg" alt="Masalah Sampah" class="problem-img">
+                </div>
+                <div class="problem-desc">
+                    <h4>Permasalahan sampah di lingkungan Sekolah</h4>
+                    <p>
+                        Di lingkungan sekolah maupun masyarakat, kita sering menjumpai tumpukan botol plastik, bungkus jajanan, dan kantong kresek di sudut koridor atau selokan. 
+                        <br><br>
+                        Pengelolaan sampah adalah upaya untuk mengurangi, memilah, mengumpulkan, mengolah, dan mendaur ulang sampah agar tidak mencemari lingkungan. Pengelolaan sampah yang baik dapat menciptakan lingkungan yang bersih, sehat, dan nyaman.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SEKSI INTERAKTIF (PILIH SAMPAH) ================= -->
+        <section id="interaktif" class="section-box">
+            <h3 class="section-title">Mari Belajar Memilah Sampah</h3>
+            <p style="text-align: center; color: #64748b; margin-bottom: 20px;">Klik salah satu kartu di bawah untuk mengetahui penanganan yang tepat!</p>
+            
+            <div class="card-container">
+                <div class="card card-organik" onclick="pilihSampah('organik')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3043/3043232.png" alt="Organik" class="sampah-img">
+                    <h3>Sampah Organik</h3>
+                    <button class="btn-organik">Pilih & Kelola</button>
+                </div>
+
+                <div class="card card-anorganik" onclick="pilihSampah('anorganik')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2666/2666687.png" alt="Anorganik" class="sampah-img">
+                    <h3>Anorganik</h3>
+                    <button class="btn-anorganik">Pilih & Kelola</button>
+                </div>
+
+                <div class="card card-b3" onclick="pilihSampah('b3')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4843/4843954.png" alt="B3" class="sampah-img">
+                    <h3>Sampah B3</h3>
+                    <button class="btn-b3">Pilih & Kelola</button>
+                </div>
+            </div>
+
+            <!-- Kotak Hasil Interaktif -->
+            <div id="hasil-box" class="info-box">
+                <h4 id="hasil-title" style="font-size: 1.4rem; margin-bottom: 10px;">Judul</h4>
+                <p id="hasil-desc" style="line-height: 1.6; white-space: pre-line;"></p>
+            </div>
+        </section>
+
+        <!-- ================= 4. SEKSI CARA PENGELOLAAN (3R) ================= -->
+        <section id="edukasi3r" class="section-box">
+            <h3 class="section-title">Penerapan Prinsip 3R</h3>
+            <div class="rrr-grid">
+                <div class="rrr-card" style="border-top-color: #ef4444;">
+                    <h4>🔴 REDUCE (Mengurangi)</h4>
+                    <p>Mengurangi penggunaan barang sekali pakai yang berpotensi menjadi sampah. Contoh: Membawa botol minum (tumblr) sendiri ke sekolah dan menolak kantong plastik.</p>
+                </div>
+                <div class="rrr-card" style="border-top-color: #f59e0b;">
+                    <h4>🟡 REUSE (Menggunakan Kembali)</h4>
+                    <p>Memanfaatkan kembali barang yang masih layak pakai tanpa perlu membuangnya. Contoh: Menggunakan kembali kaleng bekas menjadi pot tanaman atau tempat pensil kelas.</p>
+                </div>
+                <div class="rrr-card" style="border-top-color: #10b981;">
+                    <h4>🟢 RECYCLE (Mendaur Ulang)</h4>
+                    <p>Mengolah kembali sampah menjadi produk baru yang bermanfaat. Contoh: Membuat pupuk kompos dari sisa makanan kantin atau menyetor botol plastik ke Bank Sampah sekolah.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 5. SEKSI INFOGRAFIS / POSTER ================= -->
+        <section id="poster" class="section-box poster-box">
+            <h3 class="section-title">Poster Edukasi Lingkungan</h3>
+            <p style="color: #64748b; margin-bottom: 25px;">Simpan dan bagikan poster ini untuk mengajak teman-teman menjaga kebersihan!</p>
+            <div class="poster-wrapper">
+                <img src="poster basing.jpeg" alt="Poster Edukasi Sampah" class="poster-img">
+            </div>
+             
+        </section>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        function pilihSampah(kategori) {
+            const box = document.getElementById('hasil-box');
+            const title = document.getElementById('hasil-title');
+            const desc = document.getElementById('hasil-desc');
+
+            box.style.display = "block";
+
+            if (kategori === 'organik') {
+                title.innerText = "🍃 Sampah Organik Sukses Dipilih!";
+                title.style.color = "#16a34a";
+                box.style.background = "#f0fdf4";
+                box.style.borderLeft = "6px solid #16a34a";
+                desc.innerText = "Sifat: Mudah membusuk secara alami.\nAksi Nyata: Masukkan ke lubang biopori sekolah atau kumpulkan di rumah kompos untuk dijadikan pupuk organik tanaman.";
+            } else if (kategori === 'anorganik') {
+                title.innerText = "🛢️ Sampah Anorganik Sukses Dipilih!";
+                title.style.color = "#2563eb";
+                box.style.background = "#eff6ff";
+                box.style.borderLeft = "6px solid #2563eb";
+                desc.innerText = "Sifat: Sangat sulit terurai oleh alam (butuh ratusan tahun).\nAksi Nyata: Pisahkan berdasarkan jenis (plastik/kertas/kaca), lalu setorkan langsung ke Bank Sampah sekolah untuk didaur ulang.";
+            } else if (kategori === 'b3') {
+                title.innerText = "⚠️ Sampah B3 Sukses Dipilih!";
+                title.style.color = "#dc2626";
+                box.style.background = "#fef2f2";
+                box.style.borderLeft = "6px solid #dc2626";
+                desc.innerText = "Sifat: Berbahaya, beracun, dan merusak kesehatan.\nAksi Nyata: Laporkan ke guru/petugas kebersihan. Wajib dibuang pada wadah khusus (Drop Box limbah elektronik) agar tidak bocor ke tanah.";
+            }
+            
+            box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
